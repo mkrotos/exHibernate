@@ -1,55 +1,54 @@
 package com.krotos.database.dao;
 
+import com.krotos.database.entity.Member;
 import com.krotos.database.entity.Run;
 import com.krotos.database.utils.HibernateUtils;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
 
-public class RunDaoImpl implements RunDao {
-
-    @Override
-    public void saveOrUpdate(Run run) {
-        Session session = getCurrentSession();
-        session.beginTransaction();
-        session.save(run);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-
-    @Override
-    public List<Run> getAll() {
-        Session session = getCurrentSession();
-        session.beginTransaction();
-        List<Run> runList = session.createQuery("from Run").list();
-        session.getTransaction().commit();
-        session.close();
-        return runList;
-    }
-
-    @Override
-    public Optional<Run> findById(long id) {
-        Session session = getCurrentSession();
-        session.beginTransaction();
-        Optional<Run> run = Optional.ofNullable(session.get(Run.class, id));
-        session.getTransaction().commit();
-        session.close();
-        return run;
-    }
-
-    @Override
-    public void delete(Run run) {
-        Session session = getCurrentSession();
-        session.beginTransaction();
-        session.delete(run);
-        session.getTransaction().commit();
-        session.close();
-    }
+public class MemberDaoImpl implements MemberDao {
 
     private Session getCurrentSession() {
         return HibernateUtils.getInstance().getSessionFactory().getCurrentSession();
+    }
+
+    @Override
+    public void saveOrUpdate(Member member) {
+        Session session = getCurrentSession();
+        session.beginTransaction();
+        session.save(member);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public List<Member> getAll() {
+        Session session = getCurrentSession();
+        session.beginTransaction();
+        List<Member> memberList = session.createQuery("from Member").list();
+        session.getTransaction().commit();
+        session.close();
+        return memberList;
+    }
+
+    @Override
+    public Optional<Member> findById(long id) {
+        Session session = getCurrentSession();
+        session.beginTransaction();
+        Optional<Member> member = Optional.ofNullable(session.get(Member.class, id));
+        session.getTransaction().commit();
+        session.close();
+        return member;
+    }
+
+    @Override
+    public void delete(Member member) {
+        Session session = getCurrentSession();
+        session.beginTransaction();
+        session.delete(member);
+        session.getTransaction().commit();
+        session.close();
     }
 }

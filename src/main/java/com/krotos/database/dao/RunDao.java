@@ -7,9 +7,8 @@ import java.util.Optional;
 
 public interface RunDao {
 
-    void save(Run run);
+    void saveOrUpdate(Run run);
     List<Run> getAll();
     Optional<Run> findById(long id);
-    void deleteById(long id);
-    void update(Run run);
+    void delete(Run run);
 }
