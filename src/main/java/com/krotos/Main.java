@@ -1,6 +1,8 @@
 package com.krotos;
 
+import com.krotos.database.dao.MemberDao;
 import com.krotos.database.dao.RunDao;
+import com.krotos.database.entity.Member;
 import com.krotos.database.entity.Run;
 import com.krotos.database.providers.DaoProvider;
 import com.krotos.database.utils.HibernateUtils;
@@ -46,6 +48,15 @@ public class Main {
             Optional<Run> byId2 = runDao.findById(byId.get().getId());
             System.out.println("deleted: " + byId2);
         }
+
+        Member member=new Member();
+        member.setName("memberOne");
+        Run runX = runDao.findById(1).get();
+        member.setRun(runX);
+        MemberDao memberDao=DaoProvider.getInstance().getMemberDao();
+        memberDao.saveOrUpdate(member);
+
+        System.out.println("\nRun with member: "+runX+runX.getMembers());
 
         HibernateUtils.getInstance().getSessionFactory().close();
     }
