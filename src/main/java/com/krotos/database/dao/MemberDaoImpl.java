@@ -1,7 +1,6 @@
 package com.krotos.database.dao;
 
 import com.krotos.database.entity.Member;
-import com.krotos.database.entity.Run;
 import com.krotos.database.utils.HibernateUtils;
 import org.hibernate.Session;
 
@@ -50,5 +49,15 @@ public class MemberDaoImpl implements MemberDao {
         session.delete(member);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public void update(Member member) {
+        Session session = getCurrentSession();
+        session.beginTransaction();
+        session.update(member);
+        session.getTransaction().commit();
+        session.close();
+
     }
 }

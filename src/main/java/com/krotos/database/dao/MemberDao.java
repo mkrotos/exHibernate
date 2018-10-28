@@ -1,7 +1,6 @@
 package com.krotos.database.dao;
 
 import com.krotos.database.entity.Member;
-import com.krotos.database.entity.Run;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,4 +13,6 @@ public interface MemberDao {
     Optional<Member> findById(long id);
 
     void delete(Member member);
+
+    void update(Member member);
 }

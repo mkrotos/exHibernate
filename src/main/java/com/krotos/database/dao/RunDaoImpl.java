@@ -3,7 +3,6 @@ package com.krotos.database.dao;
 import com.krotos.database.entity.Run;
 import com.krotos.database.utils.HibernateUtils;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +10,7 @@ import java.util.Optional;
 public class RunDaoImpl implements RunDao {
 
     @Override
-    public void saveOrUpdate(Run run) {
+    public void save(Run run) {
         Session session = getCurrentSession();
         session.beginTransaction();
         session.save(run);
@@ -47,6 +46,16 @@ public class RunDaoImpl implements RunDao {
         session.delete(run);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public void update(Run run) {
+        Session session = getCurrentSession();
+        session.beginTransaction();
+        session.update(run);
+        session.getTransaction().commit();
+        session.close();
+
     }
 
     private Session getCurrentSession() {
